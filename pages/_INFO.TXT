@@ -1,0 +1,1 @@
+Тут лежат классы страниц сайта в формате page_mode, например: index.php?page=index&mode=list попадаем в index_list
