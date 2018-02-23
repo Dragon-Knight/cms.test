@@ -1,5 +1,15 @@
 <?php
 
+spl_autoload_register(function ($class) {
+    $file = str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
+    $path = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'Core' . DIRECTORY_SEPARATOR . $file;
+
+    if (file_exists( $path ))
+    {
+        require_once( $path );
+    }
+});
+
 // Точка входа.
 // Должна
 //	Принимать на вход параметры например index.php?page=index&mode=list&...
