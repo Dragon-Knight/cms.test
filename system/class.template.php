@@ -1,6 +1,6 @@
 <?php
 
-class template
+class Template
 {
 	private $_base_dir = "/pages/templates/";
 	
