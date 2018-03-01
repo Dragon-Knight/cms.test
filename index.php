@@ -10,6 +10,11 @@ spl_autoload_register(function ($class) {
     }
 });
 
+Bootstrap::execute(
+    Request::getInstance()->get('page'),
+    Request::getInstance()->get('mode')
+);
+
 // Точка входа.
 // Должна
 //	Принимать на вход параметры например index.php?page=index&mode=list&...
