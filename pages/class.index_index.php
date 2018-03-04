@@ -1,12 +1,25 @@
 <?php
 
-class index_index extends core
+class index_index extends Core
 {
 	protected function GetInfo()
 	{
-		// Метод описывает текущую страницу.. Где находится, для чего нужна. Нужна для генерации меню, выдача прав и т.д.
 		return array
 		(
+			"auth" => true,
+			"methods" => array
+			(
+				"GET" => array
+				(
+					"id" => array(false, "int")
+				),
+				"POST" => array
+				(
+					"id" => array(true, "int"),
+					"name" => array(true, "string"),
+					"phone" => array(true, "string")
+				)
+			),
 			"menu" => array("Главная" => "Главная"), // Описываю меню. Т.е. Главный раздел "Главная" и в нём страница "Главная".
 			"info" => "Страница общей информации" // Описываю информацию страницы.
 			// Другие поля, которые могут пригодится потом.
@@ -18,13 +31,25 @@ class index_index extends core
 		// Тут я описываю и проверяю логику доступа пользователя к этой странице.
 		// Если верну true, то доступ разрешён и показываем страницу, если false, то показываем 403.
 	}
-	
-	protected function Page()
+
+	protected function Get($data)
 	{
-		// Тут сама страница.
+		$content  = "<h1>protected function Get()</h1><br>\r\n";
+		$content .= "<pre>" . print_r($data, true) . "</pre>";
+		
+		return $content;
 	}
 	
-	// Вообще ещё потом хочу разделить логику от разметки, т.е. например в Page() мы показываем форму, а когда нажали Отправить форму, то попадаем в метод Post().
+	protected function Post($data)
+	{
+		$content  = "<h1>protected function Post()</h1><br>\r\n";
+		$content .= "<pre>" . print_r($data, true) . "</pre>";
+		
+		return $content;
+	}
+	
+	
+	
 }
 
 ?>
