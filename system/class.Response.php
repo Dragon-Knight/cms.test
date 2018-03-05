@@ -42,6 +42,9 @@ class Response
 			}
 		}
 	}
+	
+	public function
+	
 }
 
 ?>

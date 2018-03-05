@@ -1,6 +1,6 @@
 <?php
 
-class index_index extends Core
+class index_index extends Pages
 {
 	protected function GetInfo()
 	{
