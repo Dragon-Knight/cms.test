@@ -6,30 +6,48 @@ class Request
 	
 	public function __construct()
 	{
+		$this->_data['SERVER'] = $_SERVER;
 		$this->_data['GET'] = $_GET;
 		$this->_data['POST'] = $_POST;
+		$this->_data['FILES'] = $_FILES;
+		$this->_data['COOKIE'] = $_COOKIE;
+		$this->_data['SESSION'] = $_SESSION;
 		
 		return;
 	}
 	
-	public function Get($section, $key, $pattern, $default = null)
+	public function Get($section, $key, $default = null)
 	{
 		$result = $default;
 		
 		if(array_key_exists($key, $this->_data[$section]) === true)
 		{
-			if(preg_match($pattern, $this->_data[$section][$key]) === 1)
-			{
-				$result = $this->_data[$section][$key];
-			}
+			$result = $this->_data[$section][$key];
 		}
 		
 		return $result;
 	}
 	
+	public function GetPageName()
+	{
+		$result = array("index", "index");
+		
+		if(preg_match("^[a-z]+$", $this->_data['GET']['page']) === 1)
+		{
+			$result[0] = $this->_data['GET']['page'];
+		}
+		
+		if(preg_match("^[a-z]+$", $this->_data['GET']['mode']) === 1)
+		{
+			$result[1] = $this->_data['GET']['mode'];
+		}
+		
+		return implode("_", $result);
+	}
+	
 	public function GetMethod()
 	{
-		return $_SERVER['REQUEST_METHOD'];
+		return $this->_data['SERVER']['REQUEST_METHOD'];
 	}
 }
 
