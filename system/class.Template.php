@@ -3,18 +3,18 @@
 class Template
 {
 	private $_template = null;
-	private $_base_dir = "/pages/templates/";
+	private $_base_dir = "pages/templates/";
 	private $_data = array
 	(
-		"%TITLE%" => "Заголовок сайта",
+		"%TITLE%" => "",
 		"%HEADS%" => "",
 		"%BODY%" => "",
-	),
+	);
 		
 	
 	function __construct()
 	{
-		$this->_template = file_get_contents($this->_base_dir . "body.tpl");
+		$this->_template = file_get_contents($this->_base_dir . "html_body.tpl");
 		
 		return;
 	}
@@ -45,8 +45,15 @@ class Template
 		return;
 	}
 	
-	public function Render()
+	public function Render($code = 200)
 	{
+		if($code != 200)
+		{
+			$error_page = file_get_contents($this->_base_dir . "html_" . $code . ".tpl");
+			
+			$this->_template = str_replace("%BODY%", $error_page, $this->_template);
+		}
+		
 		return strtr($this->_template, $this->_data);
 	}
 }

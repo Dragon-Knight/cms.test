@@ -32,12 +32,12 @@ class Request
 	{
 		$result = array("index", "index");
 		
-		if(preg_match("^[a-z]+$", $this->_data['GET']['page']) === 1)
+		if(preg_match("/^[a-z]+$/", $this->_data['GET']['page']) === 1)
 		{
 			$result[0] = $this->_data['GET']['page'];
 		}
 		
-		if(preg_match("^[a-z]+$", $this->_data['GET']['mode']) === 1)
+		if(preg_match("/^[a-z]+$/", $this->_data['GET']['mode']) === 1)
 		{
 			$result[1] = $this->_data['GET']['mode'];
 		}

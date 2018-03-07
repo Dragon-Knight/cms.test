@@ -14,7 +14,9 @@
 <table width="1600" height="100%" align="center" border="1" cellpadding="0" cellspacing="0">
 	<tr>
 		<td align="center" valign="top">
-			%BODY%
+		
+%BODY%
+		
 		</td>
 	</tr>
 </table>

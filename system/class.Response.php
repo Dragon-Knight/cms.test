@@ -1,16 +1,23 @@
 <?php
 
+require_once("class.Template.php");
+
 class Response
 {
-	private $_template_dir = "/pages/templates/";
-	private $_content = "";
-	private $_mode = null;
+	private $_config = array
+	(
+		"mode" => "html",
+		"gzip" => true
+	);
+	private $_content = array
+	(
+		"title" => "",
+		"heads" => "",
+		"body" => "",
+	);
 	
-	
-	function __construct($mode)
+	function __construct()
 	{
-		$this->_mode = $mode;
-		
 		return;
 	}
 	
@@ -19,17 +26,30 @@ class Response
 		return;
 	}
 	
-	public function SetContent($content)
+	public function SetConfig($key, $value)
 	{
-		$this->_content = $content;
+		$this->_config[$key] = $value;
 	}
 	
-	public function Render()
+	public function SetContent($key, $value)
 	{
-		switch($this->_mode)
+		$this->_content[$key] = $value;
+	}
+	
+	public function Render($code = 200)
+	{
+		$result = "";
+		
+		switch($this->_config['mode'])
 		{
 			case "html":
 			{
+				$tpl = new Template();
+				$tpl->SetTitle($this->_content['title']);
+				$tpl->SetHeads($this->_content['heads']);
+				$tpl->SetBody($this->_content['body']);
+				$result = $tpl->Render($code);
+				
 				break;
 			}
 			case "json":
@@ -41,9 +61,17 @@ class Response
 				break;
 			}
 		}
+		
+		if($this->_config['gzip'] === true)
+		{
+			header("Content-Encoding: gzip");
+			$result = gzencode($result);
+		}
+		
+		echo $result;
 	}
 	
-	public function
+	//public function
 	
 }
 
