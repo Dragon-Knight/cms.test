@@ -33,7 +33,7 @@ class index_index extends Pages
 		return true;
 	}
 
-	public function Get($data)
+	public function Get($data = "qwe")
 	{
 		$content  = "<h1>protected function Get()</h1><br>\r\n";
 		$content .= "<pre>" . print_r($data, true) . "</pre>";

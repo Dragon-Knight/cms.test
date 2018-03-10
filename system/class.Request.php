@@ -28,7 +28,10 @@ class Request
 		return $result;
 	}
 	
-	public function GetPageName()
+	/*
+		Получаем из запроса нужное имя класса страницы.
+	*/
+	public function GetClass()
 	{
 		$result = array("index", "index");
 		
@@ -45,9 +48,12 @@ class Request
 		return implode("_", $result);
 	}
 	
+	/*
+		Получаем имя метода для вызова.
+	*/
 	public function GetMethod()
 	{
-		return $this->_data['SERVER']['REQUEST_METHOD'];
+		return ucfirst(strtolower($this->_data['SERVER']['REQUEST_METHOD']));
 	}
 }
 
